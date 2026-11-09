@@ -4,9 +4,10 @@ export async function askGeminiJSON(prompt) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL}:generateContent`;
   let lastError;
 
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-      const res = await fetch(url, {
+        const t0 = Date.now();
+        const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -16,8 +17,9 @@ export async function askGeminiJSON(prompt) {
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseMimeType: 'application/json', temperature: 0.2 },
         }),
-        signal: AbortSignal.timeout(30000),
+        signal: AbortSignal.timeout(60000),
       });
+      console.log(`Gemini attempt ${attempt}: status ${res.status}, ${Date.now() - t0}ms`);
       const data = await res.json();
 
       if (res.status === 503 || res.status === 429) {

@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { createOrder, captureOrder } from '../services/paypal.js';
 import Transaction from '../models/Transaction.js';
+import Task from '../models/Task.js';
+import { log } from '../services/audit.js';
 
 const router = Router();
 
@@ -23,6 +25,8 @@ router.post('/capture', async (req, res) => {
       { orderId },
       { status: result.status, captureId: result.captureId }
     );
+    const task = await Task.findOneAndUpdate({ orderId }, { status: 'COMPLETED' });
+    if (task) await log(task._id, 'PAYMENT_CAPTURED', `Payment completed. Capture ID ${result.captureId}`);
     res.json(result);
   } catch (e) {
     await Transaction.findOneAndUpdate({ orderId: req.body.orderId }, { status: 'FAILED' });

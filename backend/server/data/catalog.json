@@ -1,0 +1,12 @@
+[
+  { "id": "pens-10", "name": "Gel pens, pack of 10", "category": "stationery", "price": 6.5, "vendor": "PaperHub" },
+  { "id": "markers-8", "name": "Whiteboard markers, set of 8", "category": "stationery", "price": 8.5, "vendor": "PaperHub" },
+  { "id": "sticky-12", "name": "Sticky notes, 12 pads", "category": "office supplies", "price": 9, "vendor": "PaperHub" },
+  { "id": "notebook-3", "name": "A5 notebooks, pack of 3", "category": "stationery", "price": 12, "vendor": "PaperHub" },
+  { "id": "stapler-hd", "name": "Heavy-duty stapler", "category": "office supplies", "price": 15, "vendor": "DeskCo" },
+  { "id": "paper-5", "name": "A4 printer paper, 5 reams", "category": "office supplies", "price": 24, "vendor": "DeskCo" },
+  { "id": "lamp-led", "name": "LED desk lamp", "category": "office supplies", "price": 38, "vendor": "DeskCo" },
+  { "id": "whiteboard-90", "name": "Whiteboard 90x60 cm", "category": "office supplies", "price": 42, "vendor": "DeskCo" },
+  { "id": "headphones-bt", "name": "Wireless headphones", "category": "electronics", "price": 45, "vendor": "TechMart" },
+  { "id": "chair-ergo", "name": "Ergonomic office chair", "category": "office supplies", "price": 140, "vendor": "DeskCo" }
+]

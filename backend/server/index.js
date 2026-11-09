@@ -5,8 +5,12 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import paymentRoutes from './routes/payments.js';
 import mandateRoutes from './routes/mandate.js';
+import taskRoutes from './routes/tasks.js';
 
-if (process.env.DNS_FIX === 'true') dns.setServers(['8.8.8.8', '1.1.1.1']);
+if (process.env.DNS_FIX === 'true') {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 const app = express();
 app.use(cors());
@@ -15,6 +19,7 @@ app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 app.use('/api/payments', paymentRoutes);
 app.use('/api/mandate', mandateRoutes);
+app.use('/api/tasks', taskRoutes);
 
 await mongoose.connect(process.env.MONGO_URI);
 console.log('MongoDB connected');
