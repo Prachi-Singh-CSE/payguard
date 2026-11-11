@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const taskSchema = new mongoose.Schema({
+  captureId: String,
   text: String,
   mandateId: { type: mongoose.Schema.Types.ObjectId, ref: 'Mandate' },
   proposal: mongoose.Schema.Types.Mixed,

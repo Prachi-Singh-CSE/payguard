@@ -88,12 +88,24 @@ export default function App() {
   const decide = (id, action) =>
     run(action, () => api(`/api/tasks/${id}/${action}`, { method: 'POST' }));
 
+  const resetDemo = () =>
+  run('reset', async () => {
+    if (!window.confirm('This clears all tasks, payments and the audit trail. Continue?')) return;
+    await api('/api/demo/reset', { method: 'POST' });
+    setMsg('Demo reset. You can start again.');
+  });
+
   const p = mandate && mandate.policy;
 
   return (
     <div className="wrap">
       <h1>PayGuard Agent</h1>
       <p className="sub">Give your AI a wallet, not a blank cheque.</p>
+
+
+      <div className="row" style={{ marginTop: 0, marginBottom: 16 }}>
+        <button className="ghost" onClick={resetDemo} disabled={!!busy}>Reset demo</button>
+      </div>
 
       {msg && <div className="msg">{msg}</div>}
 

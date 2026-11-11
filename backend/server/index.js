@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import paymentRoutes from './routes/payments.js';
 import mandateRoutes from './routes/mandate.js';
 import taskRoutes from './routes/tasks.js';
+import demoRoutes from './routes/demo.js';
 
 if (process.env.DNS_FIX === 'true') {
   dns.setServers(['8.8.8.8', '1.1.1.1']);
@@ -20,6 +21,7 @@ app.get('/api/health', (req, res) => res.json({ ok: true }));
 app.use('/api/payments', paymentRoutes);
 app.use('/api/mandate', mandateRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/demo', demoRoutes);
 
 await mongoose.connect(process.env.MONGO_URI);
 console.log('MongoDB connected');

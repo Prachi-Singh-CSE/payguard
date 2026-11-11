@@ -15,7 +15,7 @@ button.danger { background: #c0392b; }
 .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
 .APPROVE, .COMPLETED { background: #d9f5e3; color: #1c7c3e; }
 .NEEDS_APPROVAL, .PENDING_APPROVAL, .AWAITING_PAYMENT { background: #fff1d6; color: #9a6400; }
-.BLOCK, .BLOCKED, .REJECTED, .NO_MATCH { background: #fde0dd; color: #b03a2e; }
+.BLOCK, .BLOCKED, .REJECTED, .NO_MATCH, .FAILED { background: #fde0dd; color: #b03a2e; }
 .task { border-top: 1px solid #edf0f5; padding: 12px 0; }
 .task:first-child { border-top: 0; }
 .muted { color: #5b6675; font-size: 13px; }

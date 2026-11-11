@@ -14,12 +14,17 @@ async function spentThisMonth() {
   const start = new Date();
   start.setDate(1);
   start.setHours(0, 0, 0, 0);
+  const recent = new Date(Date.now() - 30 * 60 * 1000);
   const rows = await Transaction.find({
-    status: { $in: ['AWAITING_PAYMENT', 'COMPLETED'] },
     createdAt: { $gte: start },
+    $or: [
+      { status: 'COMPLETED' },
+      { status: 'AWAITING_PAYMENT', createdAt: { $gte: recent } },
+    ],
   });
   return rows.reduce((sum, t) => sum + (t.amount || 0), 0);
 }
+
 
 async function startPayment(task) {
   const p = task.proposal;
@@ -39,6 +44,7 @@ async function startPayment(task) {
 }
 
 router.post('/', async (req, res) => {
+  let task;
   try {
     const { text } = req.body;
     if (!text) return res.status(400).json({ error: 'Please describe the task.' });
@@ -46,7 +52,7 @@ router.post('/', async (req, res) => {
     const mandate = await Mandate.findOne({ active: true }).sort({ createdAt: -1 });
     if (!mandate) return res.status(400).json({ error: 'Create a mandate first.' });
 
-    const task = await Task.create({ text, mandateId: mandate._id });
+    task = await Task.create({ text, mandateId: mandate._id });
     await log(task._id, 'TASK_RECEIVED', text);
 
     const p = await proposePurchase(text);
@@ -80,7 +86,12 @@ router.post('/', async (req, res) => {
 
     if (result.decision === 'APPROVE') await startPayment(task);
     res.json(task);
-  } catch (e) {
+  }  catch (e) {
+    if (task) {
+      task.status = 'FAILED';
+      task.reason = e.message;
+      await task.save();
+    }
     res.status(500).json({ error: e.message });
   }
 });
