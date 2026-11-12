@@ -9,7 +9,7 @@ Built for the **PayPal AI Hackathon** (Build What's Next with PayPal and AI).
 | | |
 |---|---|
 | **Live demo** | https://payguard-lake-seven.vercel.app/|
-| **Demo video (under 3 min)** | TODO: add your YouTube link |
+| **Demo video (under 3 min)** | https://youtu.be/IJyuyC5rzHg?si=k8InUjzUWzynyZsl |
 | **Code** | You are here. MIT licensed. |
 
 ---
