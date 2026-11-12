@@ -84,7 +84,7 @@ The AI never moves money and never makes the final decision.
 ### Option 1: Hosted demo (about 2 minutes)
 
 1. Open the live demo: TODO: add URL.
-2. Click **Reset demo** first, because the demo is shared and other visitors may have used up the limits.
+2. Click **Reset demo** first (it clears all data, including the policy), then click Create policy. A sample mandate is pre-filled.
 3. Click **Create policy**. A sample mandate is pre-filled (limits: $50 per purchase, $200 per month, ask above $30).
 4. Click each example task and check the result:
 
